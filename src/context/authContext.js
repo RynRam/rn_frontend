@@ -5,7 +5,7 @@ import { navigate } from '../navigationRef';
 
 
 const authReducer = (state, action) => {
-    switch(action.type){
+    switch (action.type) {
         // case 'add_error':
         //     return { ...state, errorMessage: action.payload };
         case 'signin':
@@ -13,7 +13,7 @@ const authReducer = (state, action) => {
         case 'clear_error_message':
             return { ...state, errorMessage: '' };
         case 'signout':
-            return { errorMessage: '', token:'' };
+            return { errorMessage: '', token: '' };
         default:
             return state;
     }
@@ -21,23 +21,23 @@ const authReducer = (state, action) => {
 
 const tryLocalSignin = dispatch => async () => {
     const token = await AsyncStorage.getItem('token');
-    if(token){
-        dispatch({ type: 'signin', payload: token});
+    if (token) {
+        dispatch({ type: 'signin', payload: token });
         navigate('Home');
-    }else{
+    } else {
         navigate('Signin');
     }
 };
 
 const clearErrorMessage = dispatch => () => {
-    dispatch({ type:'clear_error_message' });
+    dispatch({ type: 'clear_error_message' });
 };
 
 
 const signup = dispatch => async ({ ip, database, email, password }, callback) => {
-    try{
-        const response = await trackerApi.post('/signup', { ip, database, email, password});
-        if(response){
+    try {
+        const response = await trackerApi.post('/signup', { ip, database, email, password });
+        if (response) {
             await AsyncStorage.setItem('token', response.data.token);
             dispatch({ type: 'signin', payload: response.data.token });
             // await AsyncStorage.getItem('token');
@@ -47,39 +47,33 @@ const signup = dispatch => async ({ ip, database, email, password }, callback) =
             // }
         }
         navigate('Home');
-    }catch(err){
+    } catch (err) {
         dispatch({ type: 'add_error', payload: 'Something went wrong with sign up' })
     }
 };
 
-const signin = dispatch =>  async ({ ip, database, email, password }, callback) => {
-    try{
-        const response = await trackerApi.post('/signin', { ip, database, email, password});
-        
-        if(response){
-            console.log(response.data.token);
+const signin = dispatch => async ({ ip, database, email, password }, callback) => {
+    try {
+        const response = await trackerApi.post('/signin', { ip, database, email, password });
+
+        if (response) {
             await AsyncStorage.setItem('token', response.data.token);
-            console.log("marker 1");
             dispatch({ type: 'signin', payload: response.data.token });
-            console.log("marker 2");
             navigate('HomeS');
-            console.log("marker 2");
         }
-    }catch(err){
+    } catch (err) {
         console.log(err.response.data);
         dispatch({ type: 'add_error', payload: 'Something went wrong with sign in' })
     }
 };
 
-const signout = (dispatch) => async  ({ email, password }) => {
+const signout = (dispatch) => async ({ email, password }) => {
     await AsyncStorage.removeItem('token');
-    dispatch({ type: 'signout'});
+    dispatch({ type: 'signout' });
     navigate('SignIn');
 };
 
-
-
-export const { Provider, Context} = createDataContext(
+export const { Provider, Context } = createDataContext(
     authReducer,
     { signin, signup, clearErrorMessage, signout, tryLocalSignin },
     { token: null, errorMessage: '' }

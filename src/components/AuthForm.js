@@ -5,10 +5,10 @@ import Spacer from '../components/Spacer';
 
 
 const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
-    const [ip, setIp] = useState('');
-    const [database, setDatabase] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [ip, setIp] = useState('192.168.1.11');
+    const [database, setDatabase] = useState('demo');
+    const [email, setEmail] = useState('fransteltabtabgarcia@gmail.com');
+    const [password, setPassword] = useState('password2');
     
    return (
         <>

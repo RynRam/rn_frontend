@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import { Text, View, TextInput, StyleSheet, Button, RefreshControl } from 'react-native';
+import { Text, View, TextInput, StyleSheet, Button, RefreshControl, Alert } from 'react-native';
 import SafeAreViewProvider from 'react-native-safe-area-context';
 const SubAccountForm  = ({ onSubmit, defaultValues }) => {
     const [SubAcct,setSubAcct] = useState(defaultValues.SubAcct);
@@ -8,15 +8,15 @@ const SubAccountForm  = ({ onSubmit, defaultValues }) => {
     const [Active,setActive] = useState(defaultValues.Active);
 
     return (
-        <View>
+        <View style={{marginTop:25}}>
             <Text style={styles.label}> Sub-Account </Text>
-            <TextInput style={styles.input} value={SubAcct} onChangeText={(newSubAcct)=> setSubAcct(newSubAcct)}/>
+            <TextInput style={styles.input} value={SubAcct} onChangeText={(SubAcct)=> setSubAcct(SubAcct)}/>
             <Text style={styles.label}> Sub-Description </Text>
-            <TextInput  style={styles.input} value={SubDesc} onChangeText={(newSubDesc)=> setSubDesc(newSubDesc)} />
+            <TextInput  style={styles.input} value={SubDesc} onChangeText={(SubDesc)=> setSubDesc(SubDesc)} />
             <Text style={styles.label}> Sub-Group </Text>
-            <TextInput style={styles.input} value={SubGroup} onChangeText={(newSubGroup)=> setSubGroup(newSubGroup)}/>
+            <TextInput style={styles.input} value={SubGroup} onChangeText={(SubGroup)=> setSubGroup(SubGroup)}/>
             <Text style={styles.label}> Active </Text>
-            <TextInput  style={styles.input} value={Active} onChangeText={(newActive)=> setActive(newActive)} />
+            <TextInput  style={styles.input} value={Active} onChangeText={(Active)=> setActive(Active)} />
             <Button title="Save" onPress={()=> onSubmit(SubAcct,SubDesc,SubGroup,Active)} />
         </View>
     )   
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SubAccountForm
+export default SubAccountForm;
