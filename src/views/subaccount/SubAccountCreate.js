@@ -14,6 +14,12 @@ const SubAccountCreateScreen  = ({navigation}) => {
   
 }
 
+SubAccountCreateScreen.navigationOptions = () => {
+    return {
+        headerShown: true
+    }
+}
+
 const styles = StyleSheet.create({});
 
 export default SubAccountCreateScreen;

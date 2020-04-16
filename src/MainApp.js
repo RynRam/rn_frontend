@@ -55,6 +55,7 @@ const MainNavigator = createDrawerNavigator(
   },
   {
     initialRouteName: 'Home'
+    
     // ,
     // headerMode: 'none'
   },

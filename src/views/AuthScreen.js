@@ -7,12 +7,14 @@ import SubAccountGridScreen from "../views/subaccount/SubAccountGrid";
 import SubAccountCreateScreen from "../views/subaccount/SubAccountCreate";
 import SubAccountShowScreen from "../views/subaccount/SubAccountShow";
 import SubAccountEditScreen from "../views/subaccount/SubAccountEdit";
-
+import AuthOptionScreen from "./AuthOptionScreen";
 
 import ResolvedAuthScreen from "../context/ResolvedAuthScreen";
 
+
 const AuthScreen = createStackNavigator({
   ResolveAuth: ResolvedAuthScreen,
+  AuthOption: AuthOptionScreen,
   SignIn: SigninScreen,
   SignUp: SignupScreen,
   HomeS: HomeScreen,
@@ -21,10 +23,10 @@ const AuthScreen = createStackNavigator({
   SubAccountGrid: SubAccountGridScreen,
   SubAccountCreate: SubAccountCreateScreen
 },{
-  initialRouteName: 'SignIn',
+  initialRouteName: 'AuthOption',
   defaultNavigationOptions:{
     // headerMode: 'none',
-    headerShown: false
+    headerShown: false,
   }
 });
 

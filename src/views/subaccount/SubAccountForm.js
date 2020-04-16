@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react';
-import { Text, View, TextInput, StyleSheet, Button, RefreshControl, Alert } from 'react-native';
-import SafeAreViewProvider from 'react-native-safe-area-context';
+import { Text, View, StyleSheet } from 'react-native';
+import { Input, Button } from 'react-native-elements'
 const SubAccountForm  = ({ onSubmit, defaultValues }) => {
     const [SubAcct,setSubAcct] = useState(defaultValues.SubAcct);
     const [SubDesc,setSubDesc] = useState(defaultValues.SubDesc);
@@ -8,16 +8,16 @@ const SubAccountForm  = ({ onSubmit, defaultValues }) => {
     const [Active,setActive] = useState(defaultValues.Active);
 
     return (
-        <View style={{marginTop:25}}>
+        <View style={{flex:1, alignContent:'center', justifyContent:'center'}}>
             <Text style={styles.label}> Sub-Account </Text>
-            <TextInput style={styles.input} value={SubAcct} onChangeText={(SubAcct)=> setSubAcct(SubAcct)}/>
+            <Input style={styles.input} inputContainerStyle={styles.inputContainer} value={SubAcct} onChangeText={(SubAcct)=> setSubAcct(SubAcct)}/>
             <Text style={styles.label}> Sub-Description </Text>
-            <TextInput  style={styles.input} value={SubDesc} onChangeText={(SubDesc)=> setSubDesc(SubDesc)} />
+            <Input  style={styles.input} inputContainerStyle={styles.inputContainer} value={SubDesc} onChangeText={(SubDesc)=> setSubDesc(SubDesc)} />
             <Text style={styles.label}> Sub-Group </Text>
-            <TextInput style={styles.input} value={SubGroup} onChangeText={(SubGroup)=> setSubGroup(SubGroup)}/>
+            <Input style={styles.input} inputContainerStyle={styles.inputContainer} value={SubGroup} onChangeText={(SubGroup)=> setSubGroup(SubGroup)}/>
             <Text style={styles.label}> Active </Text>
-            <TextInput  style={styles.input} value={Active} onChangeText={(Active)=> setActive(Active)} />
-            <Button title="Save" onPress={()=> onSubmit(SubAcct,SubDesc,SubGroup,Active)} />
+            <Input  style={styles.input} inputContainerStyle={styles.inputContainer} value={Active} onChangeText={(Active)=> setActive(Active)} />
+            <Button title="Save" buttonStyle={styles.buttonStyle} onPress={()=> onSubmit(SubAcct,SubDesc,SubGroup,Active)} />
         </View>
     )   
 }
@@ -36,9 +36,23 @@ const styles = StyleSheet.create({
         borderColor: 'black'
     },
     label : {
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 5
+    },
+    inputContainer : {
+        borderWidth:2,
+        borderRadius: 10,
+        borderColor:'#102E52', 
+        padding: 5,
+    },
+    buttonStyle: { 
+        backgroundColor: '#102E52', 
+        marginVertical: 15, 
+        borderRadius: 25, 
+        height: 50, 
+        alignSelf: 'center', 
+        width:250
     }
 })
 

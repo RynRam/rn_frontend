@@ -16,7 +16,7 @@ const SignupScreen = ({ navigation }) => {
                     onWillBlur={ clearErrorMessage }
                 />
                 <AuthForm
-                    headerText="Sign Up"
+                    // headerText="Sign Up"
                     errorMessage={state.errorMessage}
                     submitButtonText="Sign up"
                     onSubmit={signup}
@@ -32,7 +32,7 @@ const SignupScreen = ({ navigation }) => {
 
 SignupScreen.navigationOptions = () => {
     return {
-        headerShown: false
+        headerShown: true
     }
 }
 

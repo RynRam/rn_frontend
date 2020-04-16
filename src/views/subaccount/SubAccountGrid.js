@@ -3,44 +3,31 @@ import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native
 
 //import CustomTabNavigator from "../../components/CustomTabNavigator/CustomTabNavigator";
 import CustomHeader from "../../components/CustomHeader/CustomHeader";
-
 import { Context as SubAccountContext } from '../../context/SubAccountContext';
-
-import { Feather } from '@expo/vector-icons';
+import { Feather, AntDesign } from '@expo/vector-icons';
 import { navigate } from './../../navigationRef';
 import trackerAPI from '../../api/api'
 const SubAccountGrid = ({ navigation }) => {
-
-    
+ 
     const { state, deleteSubAccount } = useContext(SubAccountContext);
-    const [ list, setList ] = useState([]);
-
+    
     useEffect(()=>{
-        trackerAPI.get('/subaccounts')
-        .then(function (response) {
-          setList(response)
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },[list.data]);
-    // console.log(list.data[1]._id)  
 
-
+        state
+        console.log(state)
+    },[state]);
+   
     return (
         <View style={{ flex: 1 }}>
             <CustomHeader navigation={navigation} style={{ marginTop: 15 }}>
             </CustomHeader>
-            <Text>Sub Account Grid</Text>
-            <TouchableOpacity onPress={() => navigate('SubAccountCreate')}>
-                <Feather name="plus" size={30} />
-            </TouchableOpacity>
-            <FlatList
-                data={list.data}
-                keyExtractor={(subaccount) => subaccount.id}
+            {/* <FlatList
+                data={state}
+                keyExtractor={(subaccount) => subaccount._id && subaccount._id.toString() }
                 renderItem={({ item }) => {
                     return (
-                        <TouchableOpacity onPress={() => navigate('SubAccountShow', { id: item._id })}>
+                        <TouchableOpacity>
+                             onPress={() => navigate('SubAccountShow', { id: item._id })}
                             <View style={styles.row}>
                                 <Text style={styles.title}>{item.SubAcct}</Text>
                                 <Text style={styles.title}>{item.SubDesc}</Text>
@@ -53,7 +40,16 @@ const SubAccountGrid = ({ navigation }) => {
                         </TouchableOpacity>
                     )
                 }}
-            />
+            /> */}
+            <TouchableOpacity
+             onPress={() => navigate('SubAccountCreate')} 
+             style={{position:'absolute',bottom:30,right:20}}>
+                <AntDesign 
+                name="addfile" 
+                size={50} 
+                style={{backgroundColor:'#102E52', color:'#fff', borderRadius: 50, padding:10, }} 
+              />
+            </TouchableOpacity>
             {/* <CustomTabNavigator navigation={this.props.navigation} /> */}
         </View>
     );

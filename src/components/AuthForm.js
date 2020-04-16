@@ -5,20 +5,15 @@ import Spacer from '../components/Spacer';
 
 
 const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
-    const [ip, setIp] = useState('192.168.1.11');
+    const [ip, setIp] = useState('192.168.1.1');
     const [database, setDatabase] = useState('demo');
-    const [email, setEmail] = useState('fransteltabtabgarcia@gmail.com');
-    const [password, setPassword] = useState('password2');
+    const [email, setEmail] = useState('ryanzc@gmail.com');
+    const [password, setPassword] = useState('123123');
     
    return (
         <>
             <Spacer>
-            <Image
-                style={styles.image}
-                source={{
-                uri: 'https://lynagails-caters.s3-ap-southeast-1.amazonaws.com/uploads/Helix/helixsoftware.png',
-                }}
-            />
+
             <Text  style={styles.headerText} h4>{headerText}</Text>
             </Spacer>
            
@@ -28,7 +23,8 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
                 autoCorrect={false}
                 value={ip} 
                 onChangeText={setIp}
-                labelStyle={styles.label}/>
+                labelStyle={styles.label}
+                inputContainerStyle={styles.inputContainer}/>
             <Spacer/>
             <Input label="Database" 
                 placeholder="Database" 
@@ -36,7 +32,8 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
                 autoCorrect={false}
                 value={database} 
                 onChangeText={setDatabase}
-                labelStyle={styles.label}/>
+                labelStyle={styles.label}
+                inputContainerStyle={styles.inputContainer}/>
             <Spacer/>
             <Input label="Email" 
                 placeholder="Email" 
@@ -44,7 +41,8 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
                 autoCorrect={false}
                 value={email} 
                 onChangeText={setEmail}
-                labelStyle={styles.label}/>
+                labelStyle={styles.label}
+                inputContainerStyle={styles.inputContainer}/>
             <Spacer/>
             <Input label="Password" 
                 secureTextEntry
@@ -53,9 +51,11 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
                 autoCorrect={false} 
                 value={password} 
                 onChangeText={setPassword}
-                labelStyle={styles.label}/>
+                labelStyle={styles.label}
+                inputContainerStyle={styles.inputContainer}
+                />
             <Spacer>
-                <Button title={submitButtonText} onPress={() => onSubmit({ ip, database,  email, password })} buttonStyle={{ backgroundColor: '#102E52', marginVertical: 15}}/>
+                <Button title={submitButtonText} onPress={() => onSubmit({ ip, database,  email, password })} buttonStyle={styles.buttonStyle}/>
                 { errorMessage ?  <Text style={styles.errorMessage}>{errorMessage}</Text> : null}
             </Spacer>
             
@@ -78,14 +78,22 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         height: 25,
     },
-    image :{
-        width: '100%',
-        height: 40,
-        marginBottom: 15,
-        paddingHorizontal : 15
-    },
     label: {
         color: 'black'
+    },
+    inputContainer : {
+        borderWidth:2,
+        borderRadius: 10,
+        borderColor:'#102E52', 
+        padding: 5,
+    },
+    buttonStyle: { 
+        backgroundColor: '#102E52', 
+        marginVertical: 15, 
+        borderRadius: 25, 
+        height: 50, 
+        alignSelf: 'center', 
+        width:250
     }
 });
 
