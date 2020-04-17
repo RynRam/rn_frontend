@@ -69,18 +69,19 @@ const AuthOptionScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     image: {
-        width: '80%',
-        position: 'absolute',
-        top: 200,
+        width: 320,
+        alignSelf:'center',
+        position:'absolute',
+        top:100,
         height: 40,
         marginBottom: 85,
         paddingHorizontal: 15,
     },
     container: {
-        flex: 6,
-        justifyContent: 'flex-end',
+        flex: 1,
+        justifyContent: 'space-between',
         alignItems: 'center',
-        alignContent: 'stretch',
+        alignContent: 'space-between',
         marginBottom: 200,
         paddingVertical: 10,
         paddingHorizontal: 5,

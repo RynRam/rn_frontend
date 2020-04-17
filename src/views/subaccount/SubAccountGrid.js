@@ -10,24 +10,24 @@ import trackerAPI from '../../api/api'
 const SubAccountGrid = ({ navigation }) => {
  
     const { state, deleteSubAccount } = useContext(SubAccountContext);
-    
+    // console.log(state)
+    const [list,setList] = useState([])
     useEffect(()=>{
-
-        state
-        console.log(state)
+        state.then((data) =>{
+            console.log(data)
+            setList(data)
+        })
     },[state]);
-   
     return (
         <View style={{ flex: 1 }}>
             <CustomHeader navigation={navigation} style={{ marginTop: 15 }}>
             </CustomHeader>
-            {/* <FlatList
-                data={state}
+            <FlatList
+                data={list}
                 keyExtractor={(subaccount) => subaccount._id && subaccount._id.toString() }
                 renderItem={({ item }) => {
                     return (
-                        <TouchableOpacity>
-                             onPress={() => navigate('SubAccountShow', { id: item._id })}
+                        <TouchableOpacity onPress={() => navigate('SubAccountShow', { id: item._id })} >
                             <View style={styles.row}>
                                 <Text style={styles.title}>{item.SubAcct}</Text>
                                 <Text style={styles.title}>{item.SubDesc}</Text>
@@ -40,7 +40,7 @@ const SubAccountGrid = ({ navigation }) => {
                         </TouchableOpacity>
                     )
                 }}
-            /> */}
+            />
             <TouchableOpacity
              onPress={() => navigate('SubAccountCreate')} 
              style={{position:'absolute',bottom:30,right:20}}>

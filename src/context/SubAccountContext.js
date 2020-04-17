@@ -4,7 +4,7 @@ import trackerApi from '../api/api';
 
 
 
-const dataReducer = (state , action) => {
+const dataReducer = (state, action) => {
     
     switch (action.type) {
         case 'add_subaccount':
@@ -20,9 +20,13 @@ const dataReducer = (state , action) => {
                 return data.ID === action.payload.ID ? action.payload : data;
             })
         case 'delete_subaccount':
-            // console.log()
+            state.then((stateObj) => {
+                console.log(stateObj.filter((data) => data._id !== action.payload.ID)) //Return OBJECT.
+                // return stateObj.filter((data) => data._id !== action.payload.ID)
+                })
+  
             // console.log(action.payload.id)
-            return state.filter((data) => data._id !== action.payload.ID)
+            // return state.subaccounts.filter((data) => data._id !== action.payload.ID)
         case 'navigate':
             return state;
         default:
@@ -72,24 +76,19 @@ const deleteSubAccount = (dispatch) => {
 }
 
 
-const InitialState = async () => {
-    const response = await trackerApi.get('/subaccounts')
-        .then(function (response) {
-            const data = response.data
-            return data
-        })
-        .catch(function (error) {
-        console.log(error);
-        });
-        return response;
-}
+const InitialState = async  () => {
+    const response = await trackerApi.get('/subaccounts');
+    const data = response.data;
+    return data;
+  }
+  
 
-
-returnState = InitialState()
-//  console.log(returnState)
 
 export const { Context, Provider } = createDataContext(
     dataReducer, 
     {addSubAccount, editSubAccount, deleteSubAccount }, 
-    [returnState]
+    InitialState().then((data) => {
+        console.log(data) //Return OBJECT
+        return data // Return OBJECT
+        }) 
 );
