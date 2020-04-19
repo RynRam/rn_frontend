@@ -82,8 +82,8 @@ const styles = StyleSheet.create({
         color: 'black'
     },
     inputContainer : {
-        borderWidth:2,
-        borderRadius: 10,
+        borderWidth:1,
+        borderRadius: 4,
         borderColor:'#102E52', 
         padding: 5,
     },

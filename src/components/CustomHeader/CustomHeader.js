@@ -3,7 +3,7 @@ import React from "react";
 import { View, TouchableOpacity,Text, Image } from "react-native"; 
 
 import styles from "../CustomHeader/styles";
-const CustomHeader = ({ navigation }) => (
+const CustomHeader = ({ navigation, title }) => (
     <View style={[styles.container]}>
         <TouchableOpacity style={[styles.icon]} >
             <Ionicons
@@ -12,7 +12,7 @@ const CustomHeader = ({ navigation }) => (
                 color="black"
                 onPress={() => navigation.openDrawer()}
             />
-            <Text style={[styles.txt]} >Dash board</Text>
+            <Text style={[styles.txt]} >{title}</Text>
         </TouchableOpacity>
     </View>
   );

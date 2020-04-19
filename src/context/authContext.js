@@ -46,7 +46,7 @@ const signup = dispatch => async ({ ip, database, email, password }, callback) =
             //     callback();
             // }
         }
-        navigate('Home');
+        navigate('HomeS');
     } catch (err) {
         dispatch({ type: 'add_error', payload: 'Something went wrong with sign up' })
     }

@@ -4,13 +4,20 @@ import { Button } from 'react-native-elements';
 import { SafeAreaView } from 'react-navigation';
 import Spacer from '../components/Spacer';
 import { Context as AuthContext } from '../context/authContext';
+import CustomHeader from '../components/CustomHeader/CustomHeader';
 
 
-const AccountScreen = () => {
+const AccountScreen = ({navigation}) => {
     const { signout } = useContext(AuthContext);
     return(
         <>
-            <SafeAreaView forceInset={{ top: 'always'}}>
+            <CustomHeader 
+            navigation={navigation}
+            title="Account"
+            style={{ marginTop: 15 }}>
+            </CustomHeader>
+            <SafeAreaView >
+            {/* forceInset={{ top: 'always'}} */}
                 <Text style={{ fontSize: 48, fontWeight: 'bold' }}> Account Screen </Text>
                 
                 

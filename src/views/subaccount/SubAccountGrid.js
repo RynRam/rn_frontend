@@ -1,54 +1,60 @@
 import React, { useEffect, useContext, useState } from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
-
+import { ListItem, SearchBar }from "react-native-elements"
 //import CustomTabNavigator from "../../components/CustomTabNavigator/CustomTabNavigator";
 import CustomHeader from "../../components/CustomHeader/CustomHeader";
 import { Context as SubAccountContext } from '../../context/SubAccountContext';
 import { Feather, AntDesign } from '@expo/vector-icons';
 import { navigate } from './../../navigationRef';
-import trackerAPI from '../../api/api'
 const SubAccountGrid = ({ navigation }) => {
- 
+
     const { state, deleteSubAccount } = useContext(SubAccountContext);
-    // console.log(state)
-    const [list,setList] = useState([])
-    useEffect(()=>{
-        state.then((data) =>{
-            console.log(data)
+    const [search, setSearch] = useState('')
+    const [list, setList] = useState([])
+    useEffect(() => {
+        state.then((data) => {
             setList(data)
         })
-    },[state]);
+    }, [state]);
     return (
         <View style={{ flex: 1 }}>
-            <CustomHeader navigation={navigation} style={{ marginTop: 15 }}>
+            <CustomHeader 
+            navigation={navigation}
+            title="Sub Account"
+            style={{ marginTop: 15 }}>
             </CustomHeader>
-            <FlatList
-                data={list}
-                keyExtractor={(subaccount) => subaccount._id && subaccount._id.toString() }
-                renderItem={({ item }) => {
-                    return (
-                        <TouchableOpacity onPress={() => navigate('SubAccountShow', { id: item._id })} >
-                            <View style={styles.row}>
-                                <Text style={styles.title}>{item.SubAcct}</Text>
-                                <Text style={styles.title}>{item.SubDesc}</Text>
-                                <Text style={styles.title}>{item.SubGroup}</Text>
-                                <Text style={styles.title}>{item.Active}</Text>
-                                <TouchableOpacity onPress={() => deleteSubAccount(item._id)}>
-                                    <Feather name="trash" style={styles.icons} />
-                                </TouchableOpacity>
-                            </View>
-                        </TouchableOpacity>
-                    )
-                }}
+            <SearchBar
+                placeholder="Type Here..."
+                platform="ios"
+                lightTheme={true}
+                round={true}
+                showCancel={true}
+                cancelIcon={true}
+                onChangeText={()=>setSearch(search)}
+                value={search}
             />
+            {
+                list.map((item) => (
+                    <ListItem
+                        key={item._id}
+                        title={item.SubAcct}
+                        subtitle={item.SubGroup}
+                        leftIcon={{ name: item.icon }}
+                        onPress={() => navigate('SubAccountShow', { id: item._id })}
+                        bottomDivider
+                        chevron
+                    />
+                ))
+            }
+
             <TouchableOpacity
-             onPress={() => navigate('SubAccountCreate')} 
-             style={{position:'absolute',bottom:30,right:20}}>
-                <AntDesign 
-                name="addfile" 
-                size={50} 
-                style={{backgroundColor:'#102E52', color:'#fff', borderRadius: 50, padding:10, }} 
-              />
+                onPress={() => navigate('SubAccountCreate')}
+                style={{ position: 'absolute', bottom: 30, right: 20 }}>
+                <AntDesign
+                    name="addfile"
+                    size={50}
+                    style={{ backgroundColor: '#102E52', color: '#fff', borderRadius: 50, padding: 10, }}
+                />
             </TouchableOpacity>
             {/* <CustomTabNavigator navigation={this.props.navigation} /> */}
         </View>
@@ -72,3 +78,28 @@ const styles = StyleSheet.create({
 })
 export default SubAccountGrid;
 
+
+
+
+
+
+
+{/* <FlatList
+data={list}
+keyExtractor={(subaccount) => subaccount._id && subaccount._id.toString()}
+renderItem={({ item }) => {
+    return (
+        <TouchableOpacity onPress={() => navigate('SubAccountShow', { id: item._id })} >
+            <View style={styles.row}>
+                <Text style={styles.title}>{item.SubAcct}</Text>
+                <Text style={styles.title}>{item.SubDesc}</Text>
+                <Text style={styles.title}>{item.SubGroup}</Text>
+                <Text style={styles.title}>{item.Active}</Text>
+                <TouchableOpacity onPress={() => deleteSubAccount(item._id)}>
+                    <Feather name="trash" style={styles.icons} />
+                </TouchableOpacity>
+            </View>
+        </TouchableOpacity>
+    )
+}}
+/> */}
