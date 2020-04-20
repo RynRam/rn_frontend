@@ -10,13 +10,13 @@ const SubAccountShowScreen = ({ navigation }) => {
     const { state } = useContext(SubAccountContext);
     const id = navigation.getParam('id');
     const [list, setList] = useState([])
+
     useEffect(() => {
         state.then((data) => {
             const subaccount = data.find((subaccount) => id == subaccount._id);
             setList(subaccount)
         })
     }, [state]);
-
     return (
         <View style={{justifyContent: 'center',flex:1}}>
             <Card
@@ -51,7 +51,11 @@ const SubAccountShowScreen = ({ navigation }) => {
         </View>
     )
 }
-
+SubAccountShowScreen.navigationOptions = () => {
+    return {
+        headerShown: true
+    }
+}
 const styles = StyleSheet.create({
     boldText: {
         fontWeight: 'bold',

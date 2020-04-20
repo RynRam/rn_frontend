@@ -9,7 +9,7 @@ const SubAccountCreateScreen  = ({navigation}) => {
     const { addSubAccount } = useContext(SubAccountContext)
 
     return <SubAccountForm 
-        onSubmit={(SubAcct, SubDesc, SubGroup, Active)=>addSubAccount(SubAcct, SubDesc, SubGroup, Active, () => navigate('SubAccountGrid'))}
+        onSubmit={(SubAcct, SubDesc, SubGroup, Active)=>addSubAccount(SubAcct, SubDesc, SubGroup, Active)}
         title="Create Profile"
     />
   

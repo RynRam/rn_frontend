@@ -12,11 +12,11 @@ const SubAccountEdit  = ({ navigation }) => {
         const subaccount = data.find((subaccount) => id == subaccount._id );
         setList(subaccount)
         })
-    },[state]);
+    },[]);
    
 
     return <SubAccountForm 
-    onSubmit={(SubAcct, SubDesc, SubGroup, Active ) => editSubAccount(id,SubAcct,SubDesc,SubGroup, Active,() => navigation.pop())}
+    onSubmit={(SubAcct, SubDesc, SubGroup, Active ) => editSubAccount(id,SubAcct,SubDesc,SubGroup, Active)}
     defaultValues={{ SubAcct: list.SubAcct, SubDesc: list.SubDesc, SubGroup: list.SubGroup, Active: list.Active}}
     title="Edit Profile"
     />
